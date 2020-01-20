@@ -1,12 +1,9 @@
 package slices
 
-type Element struct {
-	value string
-}
+type Element string
+type Elements []Element
 
-type Elements []*Element
-
-func (es Elements) Delete(key int) ([]*Element, error) {
+func (es Elements) Delete(key int) (Elements, error) {
 	if len(es) <= 0 {
 		return nil, nil
 	}
@@ -14,19 +11,20 @@ func (es Elements) Delete(key int) ([]*Element, error) {
 	if key < len(es)-1 {
 		copy(es[key:], es[key+1:])
 	}
-	es[len(es)-1] = nil
+	es[len(es)-1] = ""
 
 	return es[:len(es)-1], nil
 }
 
-func (es Elements) Insert(key int, order *Element) []*Element {
+func (es Elements) Insert(key int, str Element) Elements {
 	if key > len(es) || key < 0 {
 		key = len(es)
 	}
 
-	es = append(es, &Element{})
+	var emptyString Element = ""
+	es = append(es, emptyString)
 	copy(es[key+1:], es[key:])
-	es[key] = order
+	es[key] = str
 
 	return es
 }

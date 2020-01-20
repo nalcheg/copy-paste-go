@@ -11,18 +11,18 @@ func TestElements_Delete(t *testing.T) {
 	}{
 		{
 			name: "empty slice",
-			es:   []*Element{},
+			es:   []Element{},
 		}, {
 			name: "one element",
-			es: []*Element{
-				{value: "one"},
+			es: []Element{
+				"one",
 			},
 		}, {
 			name: "many elements",
-			es: []*Element{
-				{value: "one"},
-				{value: "two"},
-				{value: "three"},
+			es: []Element{
+				"one",
+				"two",
+				"three",
 			},
 		},
 	}
@@ -35,7 +35,7 @@ func TestElements_Delete(t *testing.T) {
 			if len(r) != len(test.es)-1 && len(test.es) > 0 {
 				t.Error()
 			}
-			if len(test.es)-1 > 0 && r[0].value == "one" {
+			if len(test.es)-1 > 0 && r[0] == "one" {
 				t.Error()
 			}
 		})
@@ -47,54 +47,54 @@ func TestElements_Insert(t *testing.T) {
 		name        string
 		es          Elements
 		insertKey   int
-		insertValue *Element
+		insertValue Element
 	}{
 		{
 			name:        "insert in empty slice on zero index",
-			es:          []*Element{},
+			es:          []Element{},
 			insertKey:   0,
-			insertValue: &Element{"insertedValue"},
+			insertValue: "insertedValue",
 		}, {
 			name:        "insert in empty slice on greater then zero index",
-			es:          []*Element{},
+			es:          []Element{},
 			insertKey:   2,
-			insertValue: &Element{"insertedValue"},
+			insertValue: "insertedValue",
 		}, {
 			name: "insert in non empty slice",
-			es: []*Element{
-				{value: "one"},
-				{value: "two"},
-				{value: "three"},
+			es: []Element{
+				"one",
+				"two",
+				"three",
 			},
 			insertKey:   0,
-			insertValue: &Element{"insertedValue"},
+			insertValue: "insertedValue",
 		}, {
 			name: "insert in non empty slice",
-			es: []*Element{
-				{value: "one"},
-				{value: "two"},
-				{value: "three"},
+			es: []Element{
+				"one",
+				"two",
+				"three",
 			},
 			insertKey:   1,
-			insertValue: &Element{"insertedValue"},
+			insertValue: "insertedValue",
 		}, {
 			name: "insert in non empty slice",
-			es: []*Element{
-				{value: "one"},
-				{value: "two"},
-				{value: "three"},
+			es: []Element{
+				"one",
+				"two",
+				"three",
 			},
 			insertKey:   2,
-			insertValue: &Element{"insertedValue"},
+			insertValue: "insertedValue",
 		}, {
 			name: "insert in non empty slice",
-			es: []*Element{
-				{value: "one"},
-				{value: "two"},
-				{value: "three"},
+			es: []Element{
+				"one",
+				"two",
+				"three",
 			},
 			insertKey:   -1,
-			insertValue: &Element{"insertedValue"},
+			insertValue: "insertedValue",
 		},
 	}
 	for _, test := range tests {
@@ -114,9 +114,36 @@ func TestElements_Insert(t *testing.T) {
 				insertId = test.insertKey
 			}
 
-			if result[insertId].value != test.insertValue.value {
+			if result[insertId] != test.insertValue {
 				t.Error()
 			}
 		})
 	}
+}
+
+func TestSlice(t *testing.T) {
+	foo := func(in []string) {
+		if len(in) <= 0 {
+			return
+		}
+		key := 0
+
+		if key < len(in)-1 {
+			copy(in[key:], in[key+1:])
+		}
+		//in[len(in)-1] = ""
+
+		//in = in[:len(in)-1]
+	}
+
+	//in := []string{"first", "second"}
+	in := []string{"first"}
+	//out := foo(in)
+	foo(in)
+
+	t.Log(in)
+	//t.Log(out)
+	t.Log(len(in))
+	//t.Log(len(out))
+	t.Log("")
 }
