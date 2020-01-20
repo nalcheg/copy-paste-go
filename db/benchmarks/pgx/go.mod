@@ -1,4 +1,4 @@
-module github.com/nalcheg/copy-paste-go/db/benchmarks
+module github.com/nalcheg/copy-paste-go/db/benchmarks/pgx
 
 go 1.13
 
