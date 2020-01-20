@@ -1,4 +1,4 @@
-module github.com/nalcheg/copy-paste-go/db/benchmarks/ch
+module github.com/nalcheg/copy-paste-go/db/benchmarks/clickhouse
 
 go 1.13
 
