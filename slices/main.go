@@ -11,9 +11,8 @@ func (es Elements) Delete(key int) (Elements, error) {
 	if key < len(es)-1 {
 		copy(es[key:], es[key+1:])
 	}
-	es[len(es)-1] = ""
 
-	return es[:len(es)-1], nil
+	return append([]Element{}, es[:len(es)-1]...), nil
 }
 
 func (es Elements) Insert(key int, str Element) Elements {

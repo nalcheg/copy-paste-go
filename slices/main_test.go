@@ -8,15 +8,18 @@ func TestElements_Delete(t *testing.T) {
 	tests := []struct {
 		name string
 		es   Elements
+		cap  int
 	}{
 		{
 			name: "empty slice",
 			es:   []Element{},
+			cap:  0,
 		}, {
 			name: "one element",
 			es: []Element{
 				"one",
 			},
+			cap: 0,
 		}, {
 			name: "many elements",
 			es: []Element{
@@ -24,6 +27,7 @@ func TestElements_Delete(t *testing.T) {
 				"two",
 				"three",
 			},
+			cap: 2,
 		},
 	}
 	for _, test := range tests {
@@ -36,6 +40,9 @@ func TestElements_Delete(t *testing.T) {
 				t.Error()
 			}
 			if len(test.es)-1 > 0 && r[0] == "one" {
+				t.Error()
+			}
+			if cap(r) != test.cap {
 				t.Error()
 			}
 		})
